@@ -14,6 +14,7 @@ class ServerController implements RpcController, RpcContext {
 
   private final SocketAddress remote;
 
+  //TODO: Read-write lock is unnecessary
   private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
   private volatile boolean canceled = false;
   private volatile Optional<String> failed = Optional.absent();
@@ -92,6 +93,7 @@ class ServerController implements RpcController, RpcContext {
 
   @Override
   public void notifyOnCancel(RpcCallback<Object> callback) {
+    // TODO: Set callback
     lock.writeLock().lock();
     try {
       if (isCanceled()) {
