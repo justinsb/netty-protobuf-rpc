@@ -93,7 +93,6 @@ class ServerController implements RpcController, RpcContext {
 
   @Override
   public void notifyOnCancel(RpcCallback<Object> callback) {
-    // TODO: Set callback
     lock.writeLock().lock();
     try {
       if (isCanceled()) {
