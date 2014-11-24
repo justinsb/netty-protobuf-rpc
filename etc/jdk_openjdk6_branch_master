@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$CI_DEPLOY_USERNAME" == "" ]]; then
+    echo "CI_DEPLOY_USERNAME not set; skipping" >& 2
+    exit 1
+fi
+
+echo "Running Maven deploy"
+exec mvn deploy --settings etc/deploy_settings.xml
+
